@@ -3,7 +3,7 @@ local log = require("codecompanion.utils.log")
 local openai = require("codecompanion.adapters.http.openai")
 
 
-            models[model.id] = {
+models[model.id] = {
               billing = billing,
               description = description,
               endpoint = internal_endpoint,
@@ -12,11 +12,110 @@ local openai = require("codecompanion.adapters.http.openai")
               meta = limits.context_window and { context_window = limits.context_window } or nil,
               opts = choice_opts,
               vendor = model.vendor,
-            }
+}
  
 
 local _models = {
 
+  {name = "qwen3-vl-flash", description = "Q Qwen3 VL Flash - Alibaba Cloud", host_company = "Alibaba" },
+  {name = "qwen3-vl-8b-thinking", description = "Qwen3 VL 8B Thinking", host_company = "Alibaba" },
+  {name = "qwen3-max", description = "Qwen3 Max - Alibaba Cloud",host_company = "Alibaba" },
+  {name = "qwen3-8b", description = "Qwen3 8B",host_company = "Alibaba" },
+  {name = "qwen-vl-plus", description = "Qwen VL Plus - Alibaba Cloud",host_company = "Alibaba" },
+  {name = "qwen-vl-max", description = "Qwen VL Max - Alibaba Cloud",host_company = "Alibaba" },
+  {name = "qwen-plus", description = "Qwen Plus - Alibaba Cloud",host_company = "Alibaba" },
+  {name = "qwen-max", description = "Qwen Max - Alibaba Cloud",host_company = "Alibaba" }, 
+  {name = "qwen-flash", description = "Qwen Flash - Alibaba Cloud",host_company = "Alibaba" },
+  {name = "claude-sonnet-4-6", description = "Claude 4.6 Sonnet", host_company = "Anthropic"},
+  {name = "claude-sonnet-4-5-20250929", description = "Claude 4.5 Sonnet", host_company = "Anthropic"},
+  {name = "claude-opus-4-8", description = "Claude 4.8 Opus", host_company = "Anthropic"}, 
+  {name = "claude-opus-4-7", description = "Claude 4.7 Opus", host_company = "Anthropic"},
+  {name = "claude-opus-4-6", description = "Claude 4.6 Opus", host_company = "Anthropic"},
+  {name = "claude-opus-4-5-20251101", description = "Claude 4.5 Opus", host_company = "Anthropic"},
+  {name = "claude-opus-4-1-20250805", description = "Claude 4.1 Opus", host_company = "Anthropic"},
+  {name = "claude-haiku-4-5-20251001", description = "Claude 4.5 Haiku", host_company = "Anthropic"},
+  {name = "command-r-08-2024", decription = "Command R", host_company="Cohere"},
+  {name = "deepseek-reasoner", description = "DeepSeek V3.2 Reasoner", host_company = "Deepseek"},
+  {name = "deepseek-chat", description = "DeepSeek V3.2 Chat", host_company = "Deepseek"},
+  {name = "gemini-3.5-flash", description = "Gemini 3.5 Flash", host_company = "GoogleAI"},
+  {name = "gemini-3.1-pro-preview", description = "Gemini 3.1 Pro", host_company = "GoogleAI"},
+  {name = "gemini-3.1-flash-lite-preview", description = "Gemini 3.1 Flash Lite", host_company = "GoogleAI"},
+  {name = "gemini-3-flash-preview", description = "Gemini 3 Flash", host_company = "GoogleAI"},
+  {name = "gemini-2.5-pro", description = "Gemini 2.5 Pro", host_company = "GoogleAI"},
+  {name = "gemini-2.5-flash", description = "Gemini 2.5 Flash", host_company = "GoogleAI"},
+
+Mistral Models:
+
+    {name = "magistral-small-latest - Magistral Small 1.2 - MistralAI
+    {name = "magistral-medium-latest - Magistral Medium 1.2 - MistralAI
+    {name = "ministral-14b-latest - Ministral 14B Latest - MistralAI
+    {name = "open-mistral-nemo - Mistral Open Nemo - MistralAI
+    {name = "mistral-small-latest - Mistral Small - MistralAI
+    {name = "mistral-medium-latest - Mistral Medium 3.1 - MistralAI
+    {name = "mistral-large-latest - Mistral Large 2 - MistralAI
+
+OpenAI Models:
+
+    {name = "gpt-5.3-codex - GPT-5.3 Codex - OpenAI
+    {name = "gpt-5.2-codex - GPT-5.2 Codex - OpenAI
+    {name = "gpt-5.1-codex-mini - GPT-5.1 Codex Mini - OpenAI
+    {name = "gpt-5.1-codex - GPT-5.1 Codex - OpenAI
+    {name = "o4-mini - GPT-o4 Mini - OpenAI
+    {name = "o3-mini - GPT-o3 Mini - OpenAI
+    {name = "gpt-5.5-pro - GPT-5.5 Pro - OpenAI
+    {name = "gpt-5.5 - GPT-5.5 - OpenAI
+    {name = "gpt-5.4-pro - GPT-5.4 Pro - OpenAI
+    {name = "gpt-5.4-nano - GPT-5.4 Nano - OpenAI
+    {name = "gpt-5.4-mini - GPT-5.4 Mini - OpenAI
+    {name = "gpt-5.4 - GPT-5.4 - OpenAI
+    {name = "gpt-5.2-pro - GPT-5.2 Pro - OpenAI
+    {name = "gpt-5.2 - GPT-5.2 - OpenAI
+    {name = "gpt-5.1 - GPT-5.1 - OpenAI
+    {name = "gpt-5-nano - GPT-5 Nano - OpenAI
+    {name = "gpt-5-mini - GPT-5 Mini - OpenAI
+    {name = "gpt-5-chat-latest - GPT-5 Chat Latest - OpenAI
+    {name = "gpt-5 - GPT-5 - OpenAI
+    {name = "gpt-4o-mini - GPT-4o Mini - OpenAI
+    {name = "gpt-4o - GPT-4o - OpenAI
+    {name = "gpt-4.1-nano - GPT-4.1 nano - OpenAI
+    {name = "gpt-4.1-mini - GPT-4.1 mini - OpenAI
+    {name = "gpt-4.1 - GPT-4.1 - OpenAI
+    {name = "gpt-4-turbo - GPT-4 Turbo - OpenAI
+    {name = "gpt-3.5-turbo - GPT-3.5 - OpenAI
+    {name = "o4-mini-deep-research - o4 Mini Deep Research - OpenAI
+    {name = "o3-pro - o3 Pro - OpenAI
+    {name = "o3-deep-research - o3 Deep Research - OpenAI
+    {name = "o3 - o3 - OpenAI
+
+Perplexity Models:
+
+    {name = "sonar-reasoning-pro - Perplexity [reasoning pro]
+    {name = "sonar-pro - Perplexity [pro]
+    {name = "sonar-deep-research - Perplexity [deep research]
+    {name = "sonar - Perplexity
+
+xAI Models:
+
+    {name = "grok-4-fast-reasoning - xAI - Grok 4 Fast Reasoning
+    {name = "grok-4-fast-non-reasoning - xAI - Grok 4 Fast Non-Reasoning
+    {name = "grok-4-0709 - xAI - Grok 4
+    {name = "grok-3-mini - xAI - Grok 3 Mini
+    {name = "grok-3 - xAI - Grok 3
+
+zai Models:
+
+    {name = "glm-5.2 - GLM-5.2 - Z.AI
+    {name = "glm-5.1 - GLM-5.1 - Z.AI
+    {name = "glm-5 - GLM-5 - Z.AI
+
+Extra Models:
+
+    {name = "meta/meta-llama-3-70b-instruct - LLaMA 3 70b - MetaAI
+    {name = "meta/llama-4-scout-instruct - LLaMA 4 Scout Instruct - MetaAI
+    {name = "meta/llama-4-maverick-instruct - LLaMA 4 Maverick Instruct - MetaAI
+    {name = "meta/llama-2-70b-chat - LLaMA 2 70b - MetaAI
+    {name = "openai/gpt-oss-20b - GPT OSS 20b - OpenAI
+    {name = "openai/gpt-oss-120b - GPT OSS 120b - OpenAI
 } 
 
 Alibaba Models:
